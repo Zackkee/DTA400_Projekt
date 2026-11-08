@@ -100,7 +100,7 @@ int main (int argc, char *argv[])
 
   // 5. Attackeraren (UDP, 5 Mbps) - Aktiv mellan sekund 60.0 och 240.0
   OnOffHelper attackerApp ("ns3::UdpSocketFactory", InetSocketAddress (ifServer.GetAddress (1), attackerPort));
-  attackerApp.SetAttribute ("DataRate", StringValue ("5Mbps")); 
+  attackerApp.SetAttribute ("DataRate", StringValue ("50Mbps")); 
   attackerApp.SetAttribute ("PacketSize", UintegerValue (1024));
   ApplicationContainer app1 = attackerApp.Install (attacker);
   app1.Start (Seconds (60.0)); 
@@ -108,7 +108,7 @@ int main (int argc, char *argv[])
 
   // 6. UDP-användare (UDP, 700 kb/s) - Aktiv mellan sekund 10.0 och 290.0
   OnOffHelper udpClientApp ("ns3::UdpSocketFactory", InetSocketAddress (ifServer.GetAddress (1), userUdpPort));
-  udpClientApp.SetAttribute ("DataRate", StringValue ("700kb/s"));
+  udpClientApp.SetAttribute ("DataRate", StringValue ("400kb/s"));
   udpClientApp.SetAttribute ("PacketSize", UintegerValue (512));
   ApplicationContainer app2 = udpClientApp.Install (userUdp);
   app2.Start (Seconds (10.0));
@@ -116,7 +116,7 @@ int main (int argc, char *argv[])
 
   // 7. TCP-användare (TCP, 700 kb/s) - Aktiv mellan sekund 10.0 och 290.0
   OnOffHelper tcpClientApp ("ns3::TcpSocketFactory", InetSocketAddress (ifServer.GetAddress (1), userTcpPort));
-  tcpClientApp.SetAttribute ("DataRate", StringValue ("700kb/s"));
+  tcpClientApp.SetAttribute ("DataRate", StringValue ("400kb/s"));
   tcpClientApp.SetAttribute ("PacketSize", UintegerValue (512));
   ApplicationContainer app3 = tcpClientApp.Install (userTcp);
   app3.Start (Seconds (10.0));
